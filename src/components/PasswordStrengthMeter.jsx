@@ -65,15 +65,15 @@ const PasswordStrengthMeter = ({ register, value }) => {
             required: true,
             pattern: {
               value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@!#$%^&()]){8,}/,
-              message: "Password Invalid",
+              message: "Please Enter a Valid Password",
             },
           })}
           type={isVisisble ? "text" : "password"}
           placeholder="Enter the Password"
-          className="w-full border border-gray-300 rounded px-4 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full border border-gray-300 rounded px-4 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-gray-400"
         />
         <div
-          className="absolute top-[50%] -translate-y-[50%] right-6 cursor-pointer"
+          className="absolute top-[48%] -translate-y-[50%] right-6 cursor-pointer text-orange-500"
           onClick={() => setIsVisible(!isVisisble)}
         >
           {isVisisble ? <FaEye /> : <FaEyeSlash />}

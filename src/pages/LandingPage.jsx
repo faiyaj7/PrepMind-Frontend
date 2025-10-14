@@ -4,11 +4,17 @@ import { App_Features } from "../constants";
 import { LuSparkles } from "react-icons/lu";
 import { Login, SignUp } from "../pages/Auth";
 import Modal from "../components/Modal";
+import userProvider from "../store/userStore";
+import ProfileInfoCard from "../components/ProfileInfoCard";
 const LandingPage = () => {
+  const user = userProvider((state) => state.user);
   const navigate = useNavigate();
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [currentPage, setCurrentPage] = useState("login");
-  const handleCTA = () => {};
+  const handleCTA = () => {
+    if (!user) setOpenAuthModal(true);
+    else navigate("/dashboard");
+  };
   return (
     <>
       <div className="pb-36 w-full min-h-full bg-[#FFFCEP]">
@@ -19,12 +25,16 @@ const LandingPage = () => {
             <div className="text-xl text-black font-bold ">
               Interview Prep AI
             </div>
-            <button
-              className="bg-linear-to-r from-[#FF9324] to-[#e99a4b] text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-black hover:text-white border border-white transition-colors cursor-pointer "
-              onClick={() => setOpenAuthModal(true)}
-            >
-              Login / Sign Up
-            </button>
+            {user ? (
+              <ProfileInfoCard />
+            ) : (
+              <button
+                className="bg-linear-to-r from-[#FF9324] to-[#e99a4b] text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-black hover:text-white border border-white transition-colors cursor-pointer "
+                onClick={() => setOpenAuthModal(true)}
+              >
+                Login / Sign Up
+              </button>
+            )}
           </header>
 
           {/* Hero Content */}
@@ -57,7 +67,10 @@ const LandingPage = () => {
                 scenario with ease.
               </p>
 
-              <button className="bg-black text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-yellow-100 hover:text-black border border-yellow-50 hover:border-yellow-300 transition-all duration-300 cursor-pointer">
+              <button
+                className="bg-black text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-yellow-100 hover:text-black border border-yellow-50 hover:border-yellow-300 transition-all duration-300 cursor-pointer"
+                onClick={handleCTA}
+              >
                 Get Started
               </button>
             </div>
@@ -105,6 +118,7 @@ const LandingPage = () => {
         onClose={() => {
           setOpenAuthModal(false);
           setCurrentPage("login");
+          document.body.style.overflow = "scroll";
         }}
         hideHeader
       >

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Modal = ({ children, isOpen, onClose, hideHeader }) => {
   if (!isOpen) return null;
+  useEffect(() => {
+    if (hideHeader)  document.body.style.overflow = "hidden";
+  }, [hideHeader]);
   return (
-    <div className="fixed inset-0 z-50 flex justify-center items-center size-full bg-black/40">
+    <div className="fixed inset-0 z-50 flex justify-center items-center size-full bg-black/40 overflow-y-scroll overflow-x-hidden">
       {/* Modal Content */}
       <div
         className={`relative flex flex-col bg-white shadow-lg rounded-lg overflow-hidden `}

@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
+import userProvider from "../../store/userStore";
 
 const Dashboard = () => {
-  return (
-    <div>Dashboard</div>
-  )
-}
+  const user = userProvider((state) => state.user);
+  console.log("from provider", user);
+  return <div>Dashboard</div>;
+};
 
-export default Dashboard
+export default Dashboard;

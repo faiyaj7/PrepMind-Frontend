@@ -6,7 +6,11 @@ import SignUp from "./pages/Auth/SignUp";
 import Login from "./pages/Auth/Login";
 import Dashboard from "./pages/Home/Dashboard";
 import InterviewPrep from "./pages/InterviewPrep/InterviewPrep";
+import userProvider from "./store/userStore";
+
 function App() {
+  const user = userProvider((state) => state.user);
+  console.log(user);
   return (
     <BrowserRouter>
       <Toaster
